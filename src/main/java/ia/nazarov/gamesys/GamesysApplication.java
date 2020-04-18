@@ -1,4 +1,4 @@
-package ia.nazarov.test.gamesys;
+package ia.nazarov.gamesys;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

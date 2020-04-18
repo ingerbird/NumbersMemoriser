@@ -1,4 +1,4 @@
-package ia.nazarov.test.gamesys.mappers;
+package ia.nazarov.gamesys.mappers;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package ia.nazarov.test.gamesys.mappers;
+package ia.nazarov.gamesys.mappers;
 
 /**
  * Basic mapper interface

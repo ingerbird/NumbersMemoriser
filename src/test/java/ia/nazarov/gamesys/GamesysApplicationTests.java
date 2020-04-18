@@ -1,4 +1,4 @@
-package ia.nazarov.test.gamesys;
+package ia.nazarov.gamesys;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

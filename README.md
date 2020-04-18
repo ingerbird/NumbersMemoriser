@@ -28,6 +28,7 @@ Number | Mnemonic
 Any word has only one numerical representation unlike numbers that may have few.
 
 For example the word "кошка" can be represented **only** like 3(к)6(ш)3(к)
+
 However the number 363 may have few words to represent: КуЛаК, КаЛьКа, КоШКа,...
 
 This project was developed as test task for GameSys

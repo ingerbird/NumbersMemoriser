@@ -1,4 +1,4 @@
-package ia.nazarov.test.gamesys.mappers;
+package ia.nazarov.gamesys.mappers;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
