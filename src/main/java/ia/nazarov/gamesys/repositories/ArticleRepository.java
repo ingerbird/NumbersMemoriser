@@ -5,5 +5,6 @@ import ia.nazarov.gamesys.models.Article;
 import java.util.Optional;
 
 public interface ArticleRepository {
-    Optional<Article> getArticleByGUID(String guid);
+    Optional<Article> findArticleByGUID(String guid);
+    void save(Article article);
 }

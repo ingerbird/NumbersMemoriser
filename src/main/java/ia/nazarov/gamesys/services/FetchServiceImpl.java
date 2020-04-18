@@ -42,6 +42,7 @@ public class FetchServiceImpl implements FetchService {
         }
         List<Article> articles = fetcher.fetch(resource.getUri());
         result = duplicateFilter.filter(articles);
+
         return result;
     }
 }

@@ -1,42 +1,36 @@
 package ia.nazarov.gamesys.controllers;
 
-import ia.nazarov.gamesys.enums.FetcherType;
-import ia.nazarov.gamesys.models.ResourceToGrab;
-import ia.nazarov.gamesys.repositories.GrabberResourceRepository;
-import ia.nazarov.gamesys.services.FetchServiceImpl;
+import ia.nazarov.gamesys.models.BasicResponse;
+import ia.nazarov.gamesys.repositories.ArticleRepository;
+import ia.nazarov.gamesys.services.RefreshService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Set;
 
 @Slf4j
 @RestController
 @RequestMapping("grabber")
 public class RefreshDataGrabberController
 {
-    private GrabberResourceRepository grabberResourceRepository;
-    private FetchServiceImpl fetchService;
+    final RefreshService refreshService;
+    final ArticleRepository articleRepository;
 
     @Autowired
-    public RefreshDataGrabberController(GrabberResourceRepository grabberResourceRepository,
-                                        FetchServiceImpl fetchService) {
-        this.grabberResourceRepository = grabberResourceRepository;
+    public RefreshDataGrabberController(RefreshService refreshService, ArticleRepository articleRepository) {
+        this.refreshService = refreshService;
+        this.articleRepository = articleRepository;
     }
     /**
-     * Forcibly refresh all data grabber sources
+     * Forcibly refresh all sources
      */
     @GetMapping(value = "refresh")
-    public void refresh() {
-        Set<ResourceToGrab> resourcesToGrabList = grabberResourceRepository.getResourcesToGrab(FetcherType.RSS);
-        resourcesToGrabList.stream()
-                /*  TODO: by default it will spawn as much threads as many cores the system has minus 1.
-                    Should be increased in parameters because of the specific of low-latency network IO
-                    -Djava.util.concurrent.ForkJoinPool.common.parallelism=20 (?!) */
-                .parallel()
-                .forEach(fetchService::fetchNew);
-        System.out.println("Hello");
+    public ResponseEntity<BasicResponse> refresh() {
+        refreshService.refresh();
+        articleRepository.findArticleByGUID("");
+        return new ResponseEntity<>(new BasicResponse("Request processed successfully"), HttpStatus.OK);
     }
 }

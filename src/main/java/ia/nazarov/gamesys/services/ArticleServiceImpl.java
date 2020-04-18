@@ -17,6 +17,6 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     @Cacheable("articles")
     public boolean isArticleExists(String guid) {
-        return articleRepository.getArticleByGUID(guid).isPresent();
+        return articleRepository.findArticleByGUID(guid).isPresent();
     }
 }

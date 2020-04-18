@@ -26,8 +26,8 @@ class DuplicateFilterTest {
     DuplicateFilterTest() {
         articles.forEach(article -> articleMap.put(article.getId(), article));
         articleRepository = Mockito.mock(ArticleRepository.class);
-        Mockito.when(articleRepository.getArticleByGUID("1")).thenReturn(Optional.of(articleMap.get("1")));
-        Mockito.when(articleRepository.getArticleByGUID("2")).thenReturn(Optional.of(articleMap.get("2")));
+        Mockito.when(articleRepository.findArticleByGUID("1")).thenReturn(Optional.of(articleMap.get("1")));
+        Mockito.when(articleRepository.findArticleByGUID("2")).thenReturn(Optional.of(articleMap.get("2")));
     }
 
 

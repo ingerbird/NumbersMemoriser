@@ -19,6 +19,6 @@ public class DuplicateFilter implements ArticleFilter {
     @Override
     public Set<Article> filter(List<Article> articles) {
         return articles.stream()
-                .filter(article -> articleService.isArticleExists(article.getId()))
+                .filter(article -> !articleService.isArticleExists(article.getId()))
                 .collect(Collectors.toSet()); }
 }

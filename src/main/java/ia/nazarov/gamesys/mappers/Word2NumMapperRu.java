@@ -1,5 +1,7 @@
 package ia.nazarov.gamesys.mappers;
 
+import org.springframework.stereotype.Component;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,6 +9,7 @@ import java.util.Map;
  * Simple implementation of Russian language mapper
  * It is String to String because of arbitrary length and possible zeroes in front
  */
+@Component
 public class Word2NumMapperRu implements BasicMapper<String, String> {
     private static Map<Character, Integer> dictionary = null;
 
