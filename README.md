@@ -40,3 +40,7 @@ RSS Reader requires 11th java. So to be able to build it within command line ./g
 in JAVA_HOME.
 
 To start instance run `./start.sh`
+
+After that to manually refresh feed do `curl http://localhost:8080/grabber/refresh`
+
+To get word by number: `curl http://localhost:8080/num2word/query?num=12`
