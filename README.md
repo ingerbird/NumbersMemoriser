@@ -32,3 +32,11 @@ For example the word "кошка" can be represented **only** like 3(к)6(ш)3(�
 However the number 363 may have few words to represent: КуЛаК, КаЛьКа, КоШКа,...
 
 This project was developed as test task for GameSys
+
+## Start project
+To build the project open it in Intellij IDEA and run buildDocker gradle task.
+
+RSS Reader requires 11th java. So to be able to build it within command line ./gradlew buildDocker, you should have 11th java
+in JAVA_HOME.
+
+To start instance run `./start.sh`

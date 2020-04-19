@@ -18,13 +18,14 @@ class DuplicateFilterTest {
     List<Article> articles = Arrays.asList(
             new Article("1", "source1", "data1"),
             new Article("2", "source2", "data2"),
-            new Article("1", "source1", "data1")
+            new Article("3", "source3", "data3")
     );
 
     Map<String, Article> articleMap = new HashMap<>();
 
     DuplicateFilterTest() {
-        articles.forEach(article -> articleMap.put(article.getId(), article));
+        articleMap.put("1", new Article("1", "source1", "data1"));
+        articleMap.put("2", new Article("2", "source2", "data2"));
         articleRepository = Mockito.mock(ArticleRepository.class);
         Mockito.when(articleRepository.findArticleByGUID("1")).thenReturn(Optional.of(articleMap.get("1")));
         Mockito.when(articleRepository.findArticleByGUID("2")).thenReturn(Optional.of(articleMap.get("2")));

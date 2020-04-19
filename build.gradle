@@ -1,12 +1,24 @@
+buildscript {
+	repositories {
+		jcenter()
+		mavenCentral()
+	}
+	dependencies {
+		classpath 'se.transmode.gradle:gradle-docker:1.2'
+	}
+}
+
 plugins {
 	id 'org.springframework.boot' version '2.2.6.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
 }
 
+apply plugin: 'docker'
+
 group = 'ia.nazarov.test'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
+sourceCompatibility = '11'
 
 repositories {
 	jcenter()
@@ -31,4 +43,18 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+}
+
+task buildDocker(type: Docker, dependsOn: build) {
+	baseImage "openjdk:11.0.7-slim"
+	//dryRun = true // Just to produce Dockerfile
+	//stageDir = file("${buildDir}/docker_stage/${jar.baseName}-${version}")
+	tagVersion = project.version.toString().toLowerCase().replace('+', '_')
+	applicationName = "${jar.baseName}".toLowerCase()
+	addFile("${buildDir}/libs/${jar.baseName}-${version}.jar", "/app/app.jar")
+	addFile("${buildDir}/resources/main/application.yml", "/app/config/application.yml")
+	addFile("${buildDir}/resources/main/schema.sql", "/app/config/schema.sql")
+
+	addInstruction("CMD", "cd /app && java \$JAVA_OPTS -jar ./app.jar")
+	exposePort(8080)
 }
